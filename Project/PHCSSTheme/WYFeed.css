@@ -1,0 +1,81 @@
+FeedPost.Header.Name {
+    fontFamilyName: @openSansRegular;
+    fontSize: 17pt;
+    textColor: @globalBlueGrayTextColor;
+    textAlignment: left;
+}
+
+FeedPost.Header.SecondLine {
+    fontFamilyName: @openSansRegular;
+    fontSize: 12pt;
+    textColor: @globalGrayTextColor;
+}
+
+FeedPost.Footer.Button {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 13pt;
+    textColor: @globalGrayTextColor;
+}
+
+FeedPost.Content.Text {
+    fontFamilyName: @openSansRegular;
+    fontSize: 15pt;
+    textColor: @globalBlackTextColor;
+    textAlignment: left;
+}
+
+FeedPost.Content.LinkTitle {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 13pt;
+    textColor: @globalBlackTextColor;
+    textAlignment: left;
+}
+
+FeedPost.Content.LinkText {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 12pt;
+    textColor: @globalGrayTextColor;
+    textAlignment: left;
+    textDecoration: underline;
+}
+
+FeedPost.Separator {
+    backgroundColor: #d2d6de;
+}
+
+NoFeedView.Label {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 22pt;
+    textAlignment: center;
+    textColor: @globalLightGrayTextColor;
+}
+
+FeedTopBar.Cell.Label {
+    fontFamilyName: @openSansRegular;
+    fontSize: 12pt;
+    colorNormal: #116689;
+    colorSelected: @whiteColor;
+    colorDisabled: rgba(255,255,255,0.5);
+    textAlignment: center;
+}
+
+FeedManageConnections.Title {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 12pt;
+    textAlignment: left;
+    textColor: @whiteColor;
+}
+
+FeedManageConnections.Label {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 16pt;
+    textAlignment: left;
+    textColor: @whiteColor;
+}
+
+FeedManageConnections.Label.Disabled {
+    fontFamilyName: @openSansSemibold;
+    fontSize: 16pt;
+    textAlignment: left;
+    textColor: #1a7398;
+}
