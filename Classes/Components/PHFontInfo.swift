@@ -29,7 +29,7 @@ public struct PHFontInfo {
         }
     }()
     
-    public init(fontName: String, fontSize: Double) {
+    public init(fontName: String, fontSize: Double = 17.0) {
         self.fontName = fontName
         self.fontSize = fontSize
     }

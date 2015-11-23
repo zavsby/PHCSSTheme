@@ -16,11 +16,11 @@ public enum PHCSSThemeControlState {
     case Disabled
 }
 
+public typealias StateColorInfos = [PHCSSThemeControlState: PHColorInfo]
+
 public protocol IPHStyleConfiguration {
-    typealias StateColorInfos = [PHCSSThemeControlState: PHColorInfo]
-    
     var fontInfo: PHFontInfo? { get set }
-    var textAlignmentInfo: PHTextAlignmentInfo { get set }
+    var textAlignmentInfo: PHTextAlignmentInfo? { get set }
     var contentVerticalAlignment: PHContentVerticalAlignmentInfo? { get set }
     var contentHorizontalAlignment: PHContentHorizontalAlignmentInfo? { get set }
     
@@ -31,8 +31,8 @@ public protocol IPHStyleConfiguration {
     var onTintColor: PHColorInfo? { get set }
     var barTintColor: PHColorInfo? { get set }
     
-    var backgroundStateColorInfos: StateColorInfos? { get set }
-    var textStateColorInfos: StateColorInfos? { get set }
+    var backgroundStateColorInfos: StateColorInfos { get set }
+    var textStateColorInfos: StateColorInfos { get set }
     
-    var underlineStyle: Int? { get set }
+    var underlineStyle: NSUnderlineStyle? { get set }
 }

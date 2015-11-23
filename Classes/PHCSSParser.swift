@@ -47,7 +47,7 @@ class PHCSSParser: PHCSSParserProtocol {
     
     private func styleConfigurationForProperties(properties: String) -> PHStyleConfiguration {
         let propertiesArray = propertiesByRemoveExcessiveCharacters(properties).componentsSeparatedByString(";")
-        var values: [[String: String]] = []
+        var values: [String: String] = [:]
         for elementString in propertiesArray {
             if elementString.isEmpty {
                 continue
@@ -58,7 +58,7 @@ class PHCSSParser: PHCSSParserProtocol {
                 let key = property[0]
                 let value = valueWithReplacedForwardValue(property[1])
                 if let value = value {
-                    values.append([key: value])
+                    values[key] = value
                 }
             } else {
                 print("CSS Parser error: wrong style property format: \(elementString)")

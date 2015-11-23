@@ -23,6 +23,7 @@ public struct PHTextAlignmentInfo {
         case Constants.Alignment.Justified:
             textAlignment = .Justified
         default:
+            print("CSS Parser error: unsupported text alignment '\(stringValue)'. Assuming left text alignment.")
             textAlignment = .Left
         }
     }

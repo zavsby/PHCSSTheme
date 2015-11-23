@@ -17,4 +17,32 @@ struct Constants {
         static let Top = "top"
         static let Bottom = "bottom"
     }
+    
+    struct Property {
+        static let TextColor = "textColor"
+        static let ColorNormal = "colorNormal"
+        static let ColorHighlighted = "colorHighlighted"
+        static let ColorSelected = "colorSelected"
+        static let ColorDisabled = "colorDisabled"
+        static let BackgroundColor = "backgroundColor"
+        static let BackgroundColorNormal = "backgroundColorNormal"
+        static let BackgroundColorHighlighted = "backgroundColorHighlighted"
+        static let BackgroundColorSelected = "backgroundColorSelected"
+        static let BackgroundColorDisabled = "backgroundColorDisabled"
+        static let FontFamilyName = "fontFamilyName"
+        static let FontSize = "fontSize"
+        static let TextAlignment = "textAlignment"
+        static let TextDecoration = "textDecoration"
+        static let TintColor = "tintColor"
+        static let BarTintColor = "barTintColor"
+        static let OnTintColor = "onTintColor"
+        static let Color = "color"
+        static let VerticalAlignment = "verticalAlignment"
+        static let HorizontalAlignment = "horizontalAlignment"
+        static let Border = "border"
+    }
+    
+    struct TextDecoration {
+        static let Underline = "underline"
+    }
 }
