@@ -45,4 +45,9 @@ struct Constants {
     struct TextDecoration {
         static let Underline = "underline"
     }
+    
+    struct MeasurePoints {
+        static let Pixel = "px"
+        static let Point = "pt"
+    }
 }

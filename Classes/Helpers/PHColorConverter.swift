@@ -22,11 +22,12 @@ class PHColorConverter {
     
     class func colorInfoFromHexString(hexString: String) throws -> PHColorInfo {
         var int = UInt32()
-        NSScanner(string: hexString).scanHexInt(&int)
+        let hexStringClear = hexString.stringByReplacingOccurrencesOfString("#", withString: "")
+        NSScanner(string: hexStringClear).scanHexInt(&int)
         
         let a, r, g, b: UInt32
         
-        switch hexString.characters.count {
+        switch hexStringClear.characters.count {
         case 6: // RGB (24-bit)
             (r, g, b, a) = (int >> 16, int >> 8 & 0xFF, int & 0xFF, 255)
         case 8: // RGBA (32-bit)

@@ -19,12 +19,22 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
             try parseFromValues(values)
         } catch PHCSSParserError.WrongStringColorFormat(let colorString) {
             print("CSS Parser error! Unable to parse color string: \(colorString)")
+        } catch PHCSSParserError.WrongStringMeasureFormat(let measureString) {
+            print("CSS Parser error! Unable to parse measure string: \(measureString)")
         } catch {
             print("CSS Parser error! Uknown exception.")
         }
     }
     
     private func parseFromValues(values: [String: String]) throws {
+        if let fontName = values[Constants.Property.FontFamilyName] {
+            if let fontSize = values[Constants.Property.FontSize], fontSizeMeasure = try PHStyleMeasure(valueString: fontSize) {
+                fontInfo = PHFontInfo(fontName: fontName, fontSize: fontSizeMeasure.value)
+            } else {
+                fontInfo = PHFontInfo(fontName: fontName)
+            }
+        }
+        
         for (key, value) in values {
             switch key {
             case Constants.Property.TextColor:
@@ -58,9 +68,6 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
             case Constants.Property.Color:
                 colorInfo = try PHColorConverter.colorInfoFromAnyFormat(value)
                 
-            case Constants.Property.FontFamilyName:
-                fontInfo = PHFontInfo(fontName: value)
-                
             case Constants.Property.TextAlignment:
                 textAlignmentInfo = PHTextAlignmentInfo(stringValue: value)
             case Constants.Property.HorizontalAlignment:
@@ -72,6 +79,10 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
                 if value == Constants.TextDecoration.Underline {
                     underlineStyle = .StyleSingle
                 }
+                
+            case Constants.Property.FontFamilyName, Constants.Property.FontSize:
+                break
+                
             default:
                 print("CSS Parser error: unsupported attribute \(key)")
             }
