@@ -14,5 +14,7 @@ struct Constants {
         static let Right = "right"
         static let Center = "center"
         static let Justified = "justified"
+        static let Top = "top"
+        static let Bottom = "bottom"
     }
 }
