@@ -19,20 +19,25 @@ public enum PHCSSThemeControlState {
 public typealias StateColorInfos = [PHCSSThemeControlState: PHColorInfo]
 
 public protocol IPHStyleConfiguration {
-    var fontInfo: PHFontInfo? { get set }
-    var textAlignmentInfo: PHTextAlignmentInfo? { get set }
-    var contentVerticalAlignment: PHContentVerticalAlignmentInfo? { get set }
-    var contentHorizontalAlignment: PHContentHorizontalAlignmentInfo? { get set }
+    var fontInfo: PHFontInfo? { get }
+    var textAlignmentInfo: PHTextAlignmentInfo? { get }
+    var contentVerticalAlignment: PHContentVerticalAlignmentInfo? { get }
+    var contentHorizontalAlignment: PHContentHorizontalAlignmentInfo? { get }
+
+    var colorInfo: PHColorInfo? { get }
+    var tintColorInfo: PHColorInfo? { get }
+    var backgroundColorInfo: PHColorInfo? { get }
+    var textColorInfo: PHColorInfo? { get }
+    var onTintColor: PHColorInfo? { get }
+    var barTintColor: PHColorInfo? { get }
+
+    var backgroundStateColorInfos: StateColorInfos { get }
+    var textStateColorInfos: StateColorInfos { get }
     
-    var colorInfo: PHColorInfo? { get set }
-    var tintColorInfo: PHColorInfo? { get set }
-    var backgroundColorInfo: PHColorInfo? { get set }
-    var textColorInfo: PHColorInfo? { get set }
-    var onTintColor: PHColorInfo? { get set }
-    var barTintColor: PHColorInfo? { get set }
+    var underlineStyle: NSUnderlineStyle? { get }
     
-    var backgroundStateColorInfos: StateColorInfos { get set }
-    var textStateColorInfos: StateColorInfos { get set }
+    var borderInfo: PHBorderInfo? { get }
     
-    var underlineStyle: NSUnderlineStyle? { get set }
+    
+    init(values: [String: String])
 }

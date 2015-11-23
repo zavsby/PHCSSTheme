@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class PHStyleConfiguration: IPHStyleConfiguration {
+public struct PHStyleConfiguration: IPHStyleConfiguration {
     var isEmpty: Bool {
         return false
     }
@@ -22,13 +22,14 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
         } catch PHCSSParserError.WrongStringMeasureFormat(let measureString) {
             print("CSS Parser error! Unable to parse measure string: \(measureString)")
         } catch {
-            print("CSS Parser error! Uknown exception.")
+            print("CSS Parser error! Unknown exception.")
         }
     }
     
-    private func parseFromValues(values: [String: String]) throws {
+    private mutating func parseFromValues(values: [String: String]) throws {
         if let fontName = values[Constants.Property.FontFamilyName] {
-            if let fontSize = values[Constants.Property.FontSize], fontSizeMeasure = try PHStyleMeasure(valueString: fontSize) {
+            if let fontSize = values[Constants.Property.FontSize] {
+                let fontSizeMeasure = try PHStyleMeasure(valueString: fontSize)
                 fontInfo = PHFontInfo(fontName: fontName, fontSize: fontSizeMeasure.value)
             } else {
                 fontInfo = PHFontInfo(fontName: fontName)
@@ -80,6 +81,9 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
                     underlineStyle = .StyleSingle
                 }
                 
+            case Constants.Property.Border:
+                borderInfo = try PHBorderInfo(string: value)
+                
             case Constants.Property.FontFamilyName, Constants.Property.FontSize:
                 break
                 
@@ -102,8 +106,10 @@ public class PHStyleConfiguration: IPHStyleConfiguration {
     public var onTintColor: PHColorInfo?
     public var barTintColor: PHColorInfo?
     
-    public lazy var backgroundStateColorInfos: StateColorInfos = [:]
-    public lazy var textStateColorInfos: StateColorInfos = [:]
+    public var backgroundStateColorInfos: StateColorInfos = [:]
+    public var textStateColorInfos: StateColorInfos = [:]
     
     public var underlineStyle: NSUnderlineStyle?
+    
+    public var borderInfo: PHBorderInfo?
 }

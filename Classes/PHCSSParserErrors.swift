@@ -11,4 +11,5 @@ import Foundation
 public enum PHCSSParserError: ErrorType {
     case WrongStringColorFormat(colorString: String)
     case WrongStringMeasureFormat(measureString: String)
+    case WrongStringBorderFormat(borderString: String)
 }

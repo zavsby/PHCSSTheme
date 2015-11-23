@@ -11,7 +11,7 @@ import Foundation
 public struct PHStyleMeasure {
     public var value: Double!
     
-    public init?(valueString: String) throws {
+    public init(valueString: String) throws {
         if let value = parseValueString(valueString) {
             self.value = value
         } else {
