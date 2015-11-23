@@ -43,3 +43,9 @@ public struct PHFontInfo {
         }
     }
 }
+
+extension PHFontInfo: CustomStringConvertible {
+    public var description: String {
+        return "Font: \(fontName) \(fontSize)"
+    }
+}

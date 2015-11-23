@@ -24,17 +24,19 @@ public enum PHBorderInfoPattern: Int {
 }
 
 public struct PHBorderInfo {
-    public var borderLeft: PHStyleMeasure?
+    public let borderLeft: PHStyleMeasure
     public var borderLeftOffset: PHStyleMeasure?
-    public var borderRight: PHStyleMeasure?
+    public let borderRight: PHStyleMeasure
     public var borderRightOffset: PHStyleMeasure?
-    public var borderTop: PHStyleMeasure?
+    public let borderTop: PHStyleMeasure
     public var borderTopOffset: PHStyleMeasure?
-    public var borderBottom: PHStyleMeasure?
+    public let borderBottom: PHStyleMeasure
     public var borderBottomOffset: PHStyleMeasure?
     
-    public var borderColorInfo: PHColorInfo?
+    public let borderColorInfo: PHColorInfo
     public var cornerRadius: PHStyleMeasure?
+    
+    private let borderPattern: PHBorderInfoPattern
     
     public init(string: String) throws {
         let parts = string.componentsSeparatedByString("-")
@@ -46,12 +48,16 @@ public struct PHBorderInfo {
             borderColorInfo = try PHColorConverter.colorInfoFromAnyFormat(parts[1])
             cornerRadius = try PHStyleMeasure(valueString: parts[2])
             
+            borderPattern = PHBorderInfoPattern.CornerRadius
+            
         case PHBorderInfoPattern.Border.rawValue:
             borderTop = try PHStyleMeasure(valueString: parts[0])
             borderLeft = try PHStyleMeasure(valueString: parts[1])
             borderBottom = try PHStyleMeasure(valueString: parts[2])
             borderRight = try PHStyleMeasure(valueString: parts[3])
             borderColorInfo = try PHColorConverter.colorInfoFromAnyFormat(parts[4])
+            
+            borderPattern = PHBorderInfoPattern.Border
         
         case PHBorderInfoPattern.BorderWithOffsets.rawValue:
             borderTop = try PHStyleMeasure(valueString: parts[0])
@@ -64,9 +70,17 @@ public struct PHBorderInfo {
             borderRightOffset = try PHStyleMeasure(valueString: parts[7])
             borderColorInfo = try PHColorConverter.colorInfoFromAnyFormat(parts[8])
             
+            borderPattern = PHBorderInfoPattern.BorderWithOffsets
+            
         default:
             throw PHCSSParserError.WrongStringBorderFormat(borderString: string)
         }
+    }
+}
+
+extension PHBorderInfo: CustomStringConvertible {
+    public var description: String {
+        return "Border: \(borderPattern) with color \(borderColorInfo) (\(borderTop),\(borderLeft),\(borderBottom),\(borderRight))"
     }
 }
 

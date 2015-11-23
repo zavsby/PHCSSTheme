@@ -28,3 +28,9 @@ public struct PHTextAlignmentInfo {
         }
     }
 }
+
+extension PHTextAlignmentInfo: CustomStringConvertible {
+    public var description: String {
+        return "Text alignment: \(textAlignment)"
+    }
+}

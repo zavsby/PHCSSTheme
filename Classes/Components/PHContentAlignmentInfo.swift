@@ -42,3 +42,15 @@ public struct PHContentVerticalAlignmentInfo {
         }
     }
 }
+
+extension PHContentHorizontalAlignmentInfo: CustomStringConvertible {
+    public var description: String {
+        return "Horizontal alignment: \(horizontalAlignment)"
+    }
+}
+
+extension PHContentVerticalAlignmentInfo: CustomStringConvertible {
+    public var description: String {
+        return "Vertical alignment: \(verticalAlignment)"
+    }
+}

@@ -34,3 +34,9 @@ public struct PHStyleMeasure {
         return nil
     }
 }
+
+extension PHStyleMeasure: CustomStringConvertible {
+    public var description: String {
+        return "Measure: \(value)"
+    }
+}
