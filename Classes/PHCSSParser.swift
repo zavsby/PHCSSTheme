@@ -69,11 +69,17 @@ class PHCSSParser: PHCSSParserProtocol {
     }
     
     private func valueWithReplacedForwardValue(value: String) -> String? {
-        if value.characters.first == "@" {
-            if let valueForKey = forwardValues[value] {
-                return value.stringByReplacingOccurrencesOfString(value, withString: valueForKey)
+        let forwardValueStartIndex = value.rangeOfString("@")?.startIndex
+        
+        if let startIndex = forwardValueStartIndex {
+            let searchRange = startIndex...value.endIndex.predecessor()
+            let endOfForwardValueIndex = value.rangeOfString("-", range: searchRange)?.startIndex
+            let key = endOfForwardValueIndex != nil ? value.substringWithRange(startIndex...endOfForwardValueIndex!.predecessor()) : value.substringFromIndex(startIndex)
+            
+            if let valueForKey = forwardValues[key] {
+                return value.stringByReplacingOccurrencesOfString(key, withString: valueForKey)
             } else {
-                print("CSS Parser error: Undeclared forward value: \(value)")
+                print("CSS Parser error: Undeclared forward value: \(key)")
                 return nil
             }
         } else {

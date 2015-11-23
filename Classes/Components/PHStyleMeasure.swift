@@ -37,6 +37,6 @@ public struct PHStyleMeasure {
 
 extension PHStyleMeasure: CustomStringConvertible {
     public var description: String {
-        return "Measure: \(value)"
+        return value.description
     }
 }

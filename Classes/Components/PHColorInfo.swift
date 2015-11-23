@@ -42,10 +42,10 @@ extension PHColorInfo: CustomStringConvertible {
     }
     
     private func hexStringRepresentation() -> String {
-        return "(\(Int(255 * red)),\(Int(255 * green)),\(Int(255 * blue)),\(alpha))"
+        return String(format: "#%02X%02X%02X_%.2f", Int(255 * red), Int(255 * green), Int(255 * blue), self.alpha)
     }
     
     private func rgbaStringRepresentation() -> String {
-        return String(format: "#%02X%02X%02X_%.2f", Int(255 * red), Int(255 * green), Int(255 * blue), self.alpha)
+        return "(\(Int(255 * red)),\(Int(255 * green)),\(Int(255 * blue)),\(alpha))"
     }
 }

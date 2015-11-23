@@ -116,29 +116,33 @@ public struct PHStyleConfiguration: IPHStyleConfiguration {
 
 extension PHStyleConfiguration: CustomStringConvertible {
     public var description: String {
-        var desc = "Style ["
-        addToDescription(desc, component: fontInfo)
-        addToDescription(desc, component: textAlignmentInfo)
-        addToDescription(desc, component: contentHorizontalAlignment)
-        addToDescription(desc, component: contentVerticalAlignment)
-        addToDescription(desc, component: colorInfo)
-        addToDescription(desc, component: tintColorInfo)
-        addToDescription(desc, component: backgroundColorInfo)
-        addToDescription(desc, component: textColorInfo)
-        addToDescription(desc, component: onTintColor)
-        addToDescription(desc, component: barTintColor)
-        addToDescription(desc, component: borderInfo)
-        addToDescription(desc, component: backgroundStateColorInfos)
-        addToDescription(desc, component: textStateColorInfos)
+        var desc = "\n["
+        addToDescription(&desc, component: fontInfo)
+        addToDescription(&desc, component: textAlignmentInfo)
+        addToDescription(&desc, component: contentHorizontalAlignment)
+        addToDescription(&desc, component: contentVerticalAlignment)
+        addToDescription(&desc, component: colorInfo)
+        addToDescription(&desc, component: tintColorInfo)
+        addToDescription(&desc, component: backgroundColorInfo)
+        addToDescription(&desc, component: textColorInfo)
+        addToDescription(&desc, component: onTintColor)
+        addToDescription(&desc, component: barTintColor)
+        addToDescription(&desc, component: borderInfo)
+        if !backgroundStateColorInfos.isEmpty {
+            addToDescription(&desc, component: backgroundStateColorInfos)
+        }
+        if !textStateColorInfos.isEmpty {
+            addToDescription(&desc, component: textStateColorInfos)
+        }
         if let underlineStyle = self.underlineStyle {
             desc += "\(underlineStyle)"
         }
-        desc += "]"
+        desc += "]\n"
         
         return desc
     }
     
-    private func addToDescription(var desc: String, component: CustomStringConvertible?) {
+    private func addToDescription(inout desc: String, component: CustomStringConvertible?) {
         if let c = component {
             desc += "\(c)\n"
         }
