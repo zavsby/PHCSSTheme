@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public struct PHFontInfo {
+public class PHFontInfo {
     private let fontName: String
     private let fontSize: Double
     private static var fontsCache: [String: UIFont] = [:]

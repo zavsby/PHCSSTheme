@@ -11,7 +11,7 @@ import Foundation
 class PHCSSParser: PHCSSParserProtocol {
     private var forwardValues = [String: String]()
     
-    func parseFromFile(filePath: String) -> [String: PHStyleConfiguration] {
+    func parseFromFile(filePath: String) throws -> [String: PHStyleConfiguration] {
         let originalCssContent = try! String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
         let cssContent = convertedCSSContent(originalCssContent)
         let styles = cssContent.componentsSeparatedByString("\n")
@@ -32,20 +32,20 @@ class PHCSSParser: PHCSSParserProtocol {
                     // Parse forward value
                     forwardValues[styleName] = propertiesByRemoveExcessiveCharacters(properties)
                 } else {
-                    let styleConfiguration = styleConfigurationForProperties(properties)
+                    let styleConfiguration = try styleConfigurationForProperties(properties)
                     if !styleConfiguration.isEmpty {
                         styleConfigurations[styleName] = styleConfiguration
                     }
                 }
             } else {
-                print("CSS Parser error: wrong style format: \(styleString)")
+                throw PHCSSParserError.WrongStyleFormat(style: styleString)
             }
         }
         
         return styleConfigurations
     }
     
-    private func styleConfigurationForProperties(properties: String) -> PHStyleConfiguration {
+    private func styleConfigurationForProperties(properties: String) throws -> PHStyleConfiguration {
         let propertiesArray = propertiesByRemoveExcessiveCharacters(properties).componentsSeparatedByString(";")
         var values: [String: String] = [:]
         for elementString in propertiesArray {
@@ -61,7 +61,7 @@ class PHCSSParser: PHCSSParserProtocol {
                     values[key] = value
                 }
             } else {
-                print("CSS Parser error: wrong style property format: \(elementString)")
+                throw PHCSSParserError.WrongStylePropertyFormat(property: elementString)
             }
         }
         

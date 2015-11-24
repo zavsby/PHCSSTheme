@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public struct PHColorInfo {
+public class PHColorInfo {
     private let red: Double
     private let green: Double
     private let blue: Double
