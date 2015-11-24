@@ -53,6 +53,11 @@ class PHSegmentedControlStyleManager: PHViewStyleManager<UISegmentedControl> {
             }
         }
         
+        if let borderInfo = styleConfiguration.borderInfo {
+            let image = PHCSSImageUtils.imageWithColor(borderInfo.borderColorInfo.color)
+            view.setDividerImage(image, forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)
+        }
+        
         if styleConfiguration.backgroundStateColorInfos.count > 0 {
             if let normalBgColorInfo = styleConfiguration.backgroundStateColorInfos[.Normal] {
                 let image = PHCSSImageUtils.imageWithColor(normalBgColorInfo.color)

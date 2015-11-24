@@ -19,15 +19,21 @@ class PHViewStyleManager<T: UIView> {
             view.tintColor = tintColor.color
         }
         
-        if let borderInfo = styleConfiguration.borderInfo {
-            if let borderRadius = borderInfo.cornerRadius {
-                view.layer.masksToBounds = true
-                view.layer.borderColor = borderInfo.borderColorInfo.color.CGColor
-                view.layer.borderWidth = CGFloat(borderInfo.borderLeft.value)
-                view.layer.cornerRadius = CGFloat(borderRadius.value)
-            } else {
-                // TODO: add borders for type 2 and 3
+        if supportsBorder() {
+            if let borderInfo = styleConfiguration.borderInfo {
+                if let borderRadius = borderInfo.cornerRadius {
+                    view.layer.masksToBounds = true
+                    view.layer.borderColor = borderInfo.borderColorInfo.color.CGColor
+                    view.layer.borderWidth = CGFloat(borderInfo.borderLeft.value)
+                    view.layer.cornerRadius = CGFloat(borderRadius.value)
+                } else {
+                    // TODO: add borders for type 2 and 3
+                }
             }
         }
+    }
+    
+    func supportsBorder() -> Bool {
+        return true
     }
 }
