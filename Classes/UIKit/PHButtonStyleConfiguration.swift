@@ -56,7 +56,21 @@ class PHButtonStyleConfiguration: PHViewStyleManager<UIButton> {
         }
         
         if styleConfiguration.backgroundStateColorInfos.count > 0 {
-            // TODO: image from color for button background
+            if let normalBgColorInfo = styleConfiguration.backgroundStateColorInfos[.Normal] {
+                view.setBackgroundImage(PHCSSImageUtils.imageWithColor(normalBgColorInfo.color), forState: .Normal)
+            }
+            
+            if let highlightedBgInfo = styleConfiguration.backgroundStateColorInfos[.Highlighted] {
+                view.setBackgroundImage(PHCSSImageUtils.imageWithColor(highlightedBgInfo.color), forState: .Highlighted)
+            }
+            
+            if let selectedBgInfo = styleConfiguration.backgroundStateColorInfos[.Selected] {
+                view.setBackgroundImage(PHCSSImageUtils.imageWithColor(selectedBgInfo.color), forState: .Selected)
+            }
+            
+            if let disabledBgInfo = styleConfiguration.backgroundStateColorInfos[.Disabled] {
+                view.setBackgroundImage(PHCSSImageUtils.imageWithColor(disabledBgInfo.color), forState: .Disabled)
+            }
         }
     }
 }
