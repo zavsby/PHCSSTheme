@@ -11,12 +11,12 @@ import Foundation
 class PHCSSParser: PHCSSParserProtocol {
     private var forwardValues = [String: String]()
     
-    func parseFromFile(filePath: String) throws -> [String: PHStyleConfiguration] {
-        let originalCssContent = try! String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
+    func parseFromFile(filePath: String) throws -> [String: IPHStyleConfiguration] {
+        let originalCssContent = try String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
         let cssContent = convertedCSSContent(originalCssContent)
         let styles = cssContent.componentsSeparatedByString("\n")
         
-        var styleConfigurations: [String: PHStyleConfiguration] = [:]
+        var styleConfigurations: [String: IPHStyleConfiguration] = [:]
         
         for styleString in styles {
             if styleString.isEmpty {

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol PHCSSParserProtocol {
-    func parseFromFile(filePath: String) throws -> [String: PHStyleConfiguration]
+    func parseFromFile(filePath: String) throws -> [String: IPHStyleConfiguration]
 }
