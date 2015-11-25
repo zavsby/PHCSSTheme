@@ -14,7 +14,6 @@ public class PHCSSTheme {
     private init() {}
     
     private let parser: PHCSSParserProtocol = PHCSSParser()
-    private var sources: [String] = []
     private var styleConfigurations: [String: IPHStyleConfiguration] = [:]
     
 }
@@ -25,23 +24,28 @@ public extension PHCSSTheme {
         let settings = Settings(dictionary: settingsDictionary)
         var sources = NSBundle.mainBundle().pathsForResourcesOfType("css", inDirectory: settings.directory)
         
-        sources.sortInPlace { (element, _) in
-            if element.containsString(settings.variablesFilename) {
-                return true
-            } else {
-                return false
-            }
+        let variablesFilepathIndex = sources.indexOf { return $0.containsString(settings.variablesFilename) }
+        if let index = variablesFilepathIndex where index != 0 {
+            let filePath = sources[index]
+            sources.removeAtIndex(index)
+            sources.insert(filePath, atIndex: 0)
         }
         
         for sourceFilePath in sources {
             try loadStyleConfigurationsFromFile(sourceFilePath)
         }
+        
+        print("PHCSSTheme: loaded \(sources.count) CSS sources")
     }
     
     public func loadStyleConfigurationsFromFile(filePath: String) throws {
         let configurations = try parser.parseFromFile(filePath)
         for (key, configuration) in configurations {
-            styleConfigurations[key] = configuration
+            if styleConfigurations[key] == nil {
+                styleConfigurations[key] = configuration
+            } else {
+                print("PHCSSTheme warning: style with key \(key) is already loaded. Skipping.")
+            }
         }
     }
     
@@ -58,3 +62,4 @@ public extension PHCSSTheme {
         private static let VariablesFilenameKey = "variablesFilename"
     }
 }
+
