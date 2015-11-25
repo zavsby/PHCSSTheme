@@ -42,6 +42,15 @@ public extension PHCSSTheme {
     }
 }
 
+// MARK:- Applying styles to attributed string
+public extension PHCSSTheme {
+    public func applyStyleToAttributedString(string: NSMutableAttributedString, keys: String, range: Range<Int>) throws {
+        let styleManager = PHAttributedStringStyleManager(attributedString: string)
+        let styleConfiguration = try styleConfigurationForKey(keys)
+        styleManager.applyStyle(styleConfiguration, range: range)
+    }
+}
+
 // MARK:- Gettings merged style configuration from styles string
 public extension PHCSSTheme {
     public func styleConfigurationForKey(key: String) throws -> IPHStyleConfiguration {
