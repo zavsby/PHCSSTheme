@@ -18,6 +18,34 @@ public class PHCSSTheme {
     
 }
 
+// MARK:- Gettings merged style configuration from styles string
+public extension PHCSSTheme {
+    public func styleConfigurationForKey(key: String) throws -> IPHStyleConfiguration {
+        let styleKeys = key.componentsSeparatedByString(" ").joinWithSeparator("").componentsSeparatedByString(",")
+        var styles = [IPHStyleConfiguration]()
+        for key in styleKeys {
+            if let style = styleConfigurations[key] {
+                styles.append(style)
+            } else {
+                throw PHCSSThemeError.StyleNotFound(key: key)
+            }
+        }
+        
+        if styles.count == 1 {
+            return styles[0]
+        } else if styles.count > 1 {
+            var previousConfiguration = styles[0]
+            for index in (1..<styles.count) {
+                previousConfiguration = previousConfiguration.mergedConfigurationWithConfiguration(styles[index])
+            }
+            
+            return previousConfiguration
+        } else {
+            throw PHCSSThemeError.EmptyStyleKeysString
+        }
+    }
+}
+
 // MARK:- Loading CSS themes from sources using settings
 public extension PHCSSTheme {
     public func loadStyleConfigurationUsingSettings(settingsDictionary: [String: AnyObject]) throws {

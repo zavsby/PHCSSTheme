@@ -93,6 +93,81 @@ public struct PHStyleConfiguration: IPHStyleConfiguration {
         }
     }
     
+    
+    // MARK:- Merging configurations
+    
+    public func mergedConfigurationWithConfiguration(configuration: IPHStyleConfiguration) -> IPHStyleConfiguration {
+        var newConfiguration = self
+        
+        if let fontInfo = configuration.fontInfo {
+            newConfiguration.fontInfo = fontInfo
+        }
+        if let textAlignmentInfo = configuration.textAlignmentInfo {
+            newConfiguration.textAlignmentInfo = textAlignmentInfo
+        }
+        if let contentHorizontalAlignment = configuration.contentHorizontalAlignment {
+            newConfiguration.contentHorizontalAlignment = contentHorizontalAlignment
+        }
+        if let contentVerticalAlignment = configuration.contentVerticalAlignment {
+            newConfiguration.contentVerticalAlignment = contentVerticalAlignment
+        }
+        if let colorInfo = configuration.colorInfo {
+            newConfiguration.colorInfo = colorInfo
+        }
+        if let tintColorInfo = configuration.tintColorInfo {
+            newConfiguration.tintColorInfo = tintColorInfo
+        }
+        if let backgroundColorInfo = configuration.backgroundColorInfo {
+            newConfiguration.backgroundColorInfo = backgroundColorInfo
+        }
+        if let textColorInfo = configuration.textColorInfo {
+            newConfiguration.textColorInfo = textColorInfo
+        }
+        if let onTintColor = configuration.onTintColor {
+            newConfiguration.onTintColor = onTintColor
+        }
+        if let barTintColor = configuration.barTintColor {
+            newConfiguration.barTintColor = barTintColor
+        }
+        if let underlineStyle = configuration.underlineStyle {
+            newConfiguration.underlineStyle = underlineStyle
+        }
+        if let borderInfo = configuration.borderInfo {
+            newConfiguration.borderInfo = borderInfo
+        }
+        if configuration.textStateColorInfos.count > 0 {
+            newConfiguration.textStateColorInfos = mergedStateColorInfos(self.textStateColorInfos, newStateColorInfos: configuration.textStateColorInfos)
+        }
+        if configuration.backgroundStateColorInfos.count > 0 {
+            newConfiguration.backgroundStateColorInfos = mergedStateColorInfos(self.backgroundStateColorInfos, newStateColorInfos: configuration.backgroundStateColorInfos)
+        }
+        
+        return newConfiguration
+    }
+    
+    private func mergedStateColorInfos(stateColorInfos: StateColorInfos, newStateColorInfos: StateColorInfos) -> StateColorInfos {
+        if stateColorInfos.count == 0 {
+            return newStateColorInfos
+        } else {
+            var newDictionary = stateColorInfos
+            
+            if let normalColor = newStateColorInfos[.Normal] {
+                newDictionary[.Normal] = normalColor
+            }
+            if let highlightedColor = newStateColorInfos[.Highlighted] {
+                newDictionary[.Highlighted] = highlightedColor
+            }
+            if let selectedColor = newStateColorInfos[.Selected] {
+                newDictionary[.Selected] = selectedColor
+            }
+            if let disabledColor = newStateColorInfos[.Disabled] {
+                newDictionary[.Disabled] = disabledColor
+            }
+            
+            return newDictionary
+        }
+    }
+    
     // MARK:- IPHStyleConfuguration protocol
     public var fontInfo: PHFontInfo?
     public var textAlignmentInfo: PHTextAlignmentInfo?

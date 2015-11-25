@@ -40,4 +40,12 @@ public protocol IPHStyleConfiguration {
     
     
     init(values: [String: String])
+    
+    /**
+     Merges given configuration with the receiver. Given configuration will replace nonnull components of the receiver.
+     
+     - parameter configuration: Configuration to be merged with
+     - returns: New merged style configuration
+     */
+    func mergedConfigurationWithConfiguration(configuration: IPHStyleConfiguration) -> IPHStyleConfiguration
 }

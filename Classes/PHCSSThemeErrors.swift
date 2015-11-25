@@ -15,3 +15,8 @@ public enum PHCSSParserError: ErrorType {
     case WrongStyleFormat(style: String)
     case WrongStylePropertyFormat(property: String)
 }
+
+public enum PHCSSThemeError: ErrorType {
+    case StyleNotFound(key: String)
+    case EmptyStyleKeysString
+}
