@@ -62,6 +62,6 @@ class PHColorConverter {
         }
         
         let alpha = colors.count == 4 ? colors[3] : 1.0
-        return PHColorInfo(red: colors[0], green: colors[1], blue: colors[2], alpha: alpha)
+        return PHColorInfo(red: colors[0] / 255, green: colors[1] / 255, blue: colors[2] / 255, alpha: alpha)
     }
 }
