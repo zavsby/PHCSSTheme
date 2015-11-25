@@ -191,7 +191,7 @@ public struct PHStyleConfiguration: IPHStyleConfiguration {
 
 extension PHStyleConfiguration: CustomStringConvertible {
     public var description: String {
-        var desc = "\n["
+        var desc = "[\n"
         addToDescription(&desc, component: fontInfo)
         addToDescription(&desc, component: textAlignmentInfo)
         addToDescription(&desc, component: contentHorizontalAlignment)

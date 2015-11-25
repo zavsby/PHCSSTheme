@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHButtonStyleConfiguration: PHViewStyleManager<UIButton> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UIButton) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UIButton) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let fontInfo = styleConfiguration.fontInfo {
             view.titleLabel?.font = fontInfo.font

@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHNavigationBarStyleManager: PHViewStyleManager<UINavigationBar> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UINavigationBar) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UINavigationBar) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let barTintColorInfo = styleConfiguration.onTintColor {
             view.barTintColor = barTintColorInfo.color

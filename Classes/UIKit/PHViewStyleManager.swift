@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
-class PHViewStyleManager<T: UIView> {
-    func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: T) {
+class PHViewStyleManager<T: UIView> : IPHStyleManager {
+    let view: T
+    
+    init(view: T) {
+        self.view = view
+    }
+    
+    func applyStyle(styleConfiguration: IPHStyleConfiguration) {
         if let backgroundColorInfo = styleConfiguration.backgroundColorInfo {
             view.backgroundColor = backgroundColorInfo.color
         }

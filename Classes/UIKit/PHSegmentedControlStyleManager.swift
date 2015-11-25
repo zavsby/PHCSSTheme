@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHSegmentedControlStyleManager: PHViewStyleManager<UISegmentedControl> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UISegmentedControl) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UISegmentedControl) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         var titleAttributes: [NSObject: AnyObject] = [:]
         if let fontInfo = styleConfiguration.fontInfo {

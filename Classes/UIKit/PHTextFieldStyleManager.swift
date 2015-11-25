@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHTextFieldStyleManager: PHViewStyleManager<UITextField> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UITextField) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UITextField) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let textColorInfo = styleConfiguration.textColorInfo {
             view.textColor = textColorInfo.color

@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHActivityIndicatorStyleManager: PHViewStyleManager<UIActivityIndicatorView> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UIActivityIndicatorView) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UIActivityIndicatorView) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let colorInfo = styleConfiguration.colorInfo {
             view.color = colorInfo.color

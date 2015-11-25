@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
-class PHLabelStyleManager: PHViewStyleManager<UILabel> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UILabel) {
-        super.applyStyle(styleConfiguration, toView: view)
+class PHLabelStyleManager : PHViewStyleManager<UILabel> {
+    override init(view: UILabel) {
+        super.init(view: view)
+    }
+
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let textColorInfo = styleConfiguration.textColorInfo {
             view.textColor = textColorInfo.color

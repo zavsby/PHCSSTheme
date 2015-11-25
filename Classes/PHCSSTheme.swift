@@ -18,6 +18,30 @@ public class PHCSSTheme {
     
 }
 
+// MARK:- Class quick access methods
+public extension PHCSSTheme {
+    public class func styleConfigurationForKey(key: String) -> IPHStyleConfiguration {
+        return try! sharedTheme.styleConfigurationForKey(key)
+    }
+    
+    public class func applyStyleToView(view: UIView, keys: String) {
+        try! sharedTheme.applyStyleToView(view, keys: keys)
+    }
+}
+
+// MARK:- Applying styles to views
+public extension PHCSSTheme {
+    public func applyStyleToView(view: UIView, styleConfiguration: IPHStyleConfiguration) {
+        let styleManager = PHStyleManagerFactory.styleManagerForView(view)
+        styleManager.applyStyle(styleConfiguration)
+    }
+    
+    public func applyStyleToView(view: UIView, keys: String) throws {
+        let styleConfiguration = try styleConfigurationForKey(keys)
+        applyStyleToView(view, styleConfiguration: styleConfiguration)
+    }
+}
+
 // MARK:- Gettings merged style configuration from styles string
 public extension PHCSSTheme {
     public func styleConfigurationForKey(key: String) throws -> IPHStyleConfiguration {

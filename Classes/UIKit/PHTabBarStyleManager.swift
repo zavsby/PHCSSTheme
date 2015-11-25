@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHTabBarStyleManager: PHViewStyleManager<UITabBar> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UITabBar) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UITabBar) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let backgroundColorInfo = styleConfiguration.backgroundColorInfo {
             view.barTintColor = backgroundColorInfo.color

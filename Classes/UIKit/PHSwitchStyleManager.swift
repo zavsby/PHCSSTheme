@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class PHSwitchStyleManager: PHViewStyleManager<UISwitch> {
-    override func applyStyle(styleConfiguration: IPHStyleConfiguration, toView view: UISwitch) {
-        super.applyStyle(styleConfiguration, toView: view)
+    override init(view: UISwitch) {
+        super.init(view: view)
+    }
+    
+    override func applyStyle(styleConfiguration: IPHStyleConfiguration) {
+        super.applyStyle(styleConfiguration)
         
         if let onTintColor = styleConfiguration.onTintColor {
             view.onTintColor = onTintColor.color
