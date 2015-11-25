@@ -65,7 +65,7 @@ class PHCSSParser: PHCSSParserProtocol {
             }
         }
         
-        return PHStyleConfiguration(values: values)
+        return try PHStyleConfiguration(values: values)
     }
     
     private func valueWithReplacedForwardValue(value: String) -> String? {

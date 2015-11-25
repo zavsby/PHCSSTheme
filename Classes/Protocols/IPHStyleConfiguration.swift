@@ -39,7 +39,7 @@ public protocol IPHStyleConfiguration {
     var borderInfo: PHBorderInfo? { get }
     
     
-    init(values: [String: String])
+    init(values: [String: String]) throws
     
     /**
      Merges given configuration with the receiver. Given configuration will replace nonnull components of the receiver.

@@ -14,15 +14,20 @@ public struct PHStyleConfiguration: IPHStyleConfiguration {
         return false
     }
     
-    public init(values: [String: String]) {
+    public init(values: [String: String]) throws {
         do {
             try parseFromValues(values)
         } catch PHCSSParserError.WrongStringColorFormat(let colorString) {
             print("CSS Parser error! Unable to parse color string: \(colorString)")
+            throw PHCSSParserError.WrongStyleFormat(style: values.description)
+            
         } catch PHCSSParserError.WrongStringMeasureFormat(let measureString) {
             print("CSS Parser error! Unable to parse measure string: \(measureString)")
+            throw PHCSSParserError.WrongStyleFormat(style: values.description)
+            
         } catch {
             print("CSS Parser error! Unknown exception.")
+            throw PHCSSParserError.WrongStyleFormat(style: values.description)            
         }
     }
     
